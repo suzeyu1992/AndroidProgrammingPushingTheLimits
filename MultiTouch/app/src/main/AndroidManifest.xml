@@ -15,9 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MultiTouchActivity" />
+        <activity android:name=".RotateActivity" />
 
-        <activity android:name=".MultiTouchActivity"/>
-        <activity android:name=".RotateActivity"/>
+        <service
+            android:name=".LocalService"
+            android:enabled="true"
+            android:exported="false"></service>
     </application>
 
 </manifest>
