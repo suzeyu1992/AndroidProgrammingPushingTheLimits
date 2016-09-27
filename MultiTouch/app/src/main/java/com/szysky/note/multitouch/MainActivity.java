@@ -7,10 +7,11 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocalService.Callback {
 
     /**
      * 绑定的远程服务的实例
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onButtonBindService(View view){
         if (mService != null){
-            mService.doBackgroundOperation();
+            mService.doBackgroundOperation(new MyComplexDataObject());
         }
     }
 
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 mService = ((LocalService.LocalBinder)service).getService();
+                // 连接成功的时候添加回调
+                mService.setCallback(MainActivity.this);
             }
 
             @Override
@@ -68,7 +71,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if (mService != null){
+            mService.setCallback(null); // 防止内存泄漏
             unbindService(serviceConnection);
         }
+    }
+
+    @Override
+    public void onOperationProgress(int progress) {
+        // 做更新进度条操作
+        Log.e("lala", "我是更新进度条回调 " );
+    }
+
+    @Override
+    public void onOperationCompleted(MyComplexResult complexResult) {
+
+        // 做展示结果
+        Log.e("lala", "我是最终结果回调" );
     }
 }
