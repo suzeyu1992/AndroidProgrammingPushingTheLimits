@@ -17,6 +17,7 @@
         </activity>
 
         <activity android:name=".MultiTouchActivity"/>
+        <activity android:name=".RotateActivity"/>
     </application>
 
 </manifest>

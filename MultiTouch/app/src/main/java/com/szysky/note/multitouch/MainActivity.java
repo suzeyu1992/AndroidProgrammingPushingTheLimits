@@ -21,4 +21,8 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getApplicationContext(), MultiTouchActivity.class));
     }
+
+    public void onButtonRotate(View view){
+        startActivity(new Intent(getApplicationContext(), RotateActivity.class));
+    }
 }
