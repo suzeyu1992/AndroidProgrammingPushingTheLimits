@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.szysky.note.ipc.R;
 
@@ -25,6 +26,18 @@ public class AidlClientActivity extends AppCompatActivity implements ServiceConn
      * 绑定的远程服务
      */
     private IMyApiInterfaceV1 mService;
+
+    /**
+     *  定义客户端的回调, 提供服务端使用
+     */
+    private IMyAidlCallback.Stub mAidlCallback = new IMyAidlCallback.Stub(){
+
+        @Override
+        public void onDataUpdated(CustomData[] data) throws RemoteException {
+            // 当被远程服务调用的时候, 仅弹出吐司
+            Toast.makeText(getApplicationContext(), "被远程调用", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +74,11 @@ public class AidlClientActivity extends AppCompatActivity implements ServiceConn
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         mService = IMyApiInterfaceV1.Stub.asInterface(service);
+        try {
+            mService.addCallback(mAidlCallback);
+        } catch (RemoteException e) {
+            Log.e(TAG, "被服务端调起发生错误!!!!", e);
+        }
     }
 
     @Override

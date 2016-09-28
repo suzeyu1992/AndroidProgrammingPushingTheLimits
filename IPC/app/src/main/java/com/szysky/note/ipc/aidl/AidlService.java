@@ -8,6 +8,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 
 import static android.content.ContentValues.TAG;
 
@@ -24,6 +26,7 @@ public class AidlService extends Service {
     public void onCreate() {
         super.onCreate();
         mCustomDataCollection = new ArrayList<>();
+        mCallbacks = new HashSet<>();
         // 使用存储的数据填充列表
         // ....
     }
@@ -59,12 +62,14 @@ public class AidlService extends Service {
     }
 
 
+    private HashSet<IMyAidlCallback> mCallbacks;
     /**
      *  实现AIDL定义的接口文件
      */
     private final IMyApiInterfaceV1.Stub mBinder = new IMyApiInterfaceV1.Stub(){
         @Override
         public boolean isPrime(long value) throws RemoteException {
+
             return isPrimeImpl(value);
         }
 
@@ -75,8 +80,26 @@ public class AidlService extends Service {
 
         @Override
         public void storeData(CustomData data) throws RemoteException {
+            Iterator<IMyAidlCallback> iterator = mCallbacks.iterator();
+            while(iterator.hasNext()){
+                iterator.next().onDataUpdated(null);
+            }
             storeDataImpl(data);
         }
+
+        @Override
+        public void addCallback(final IMyAidlCallback callback) throws RemoteException {
+            // 实现回调. 这里同样使用linkToDeath()来接收通知, 以防客户端Binder被杀死
+            mCallbacks.add(callback);
+            callback.asBinder().linkToDeath(new DeathRecipient() {
+                @Override
+                public void binderDied() {
+                    mCallbacks.remove(callback);
+                }
+            }, 0);
+        }
+
+
     };
 
 }

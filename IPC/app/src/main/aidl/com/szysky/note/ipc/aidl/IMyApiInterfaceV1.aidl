@@ -3,6 +3,7 @@ package com.szysky.note.ipc.aidl;
 
 // Declare any non-default types here with import statements
 import com.szysky.note.ipc.aidl.CustomData;
+import com.szysky.note.ipc.aidl.IMyAidlCallback;
 
 interface IMyApiInterfaceV1 {
 
@@ -14,4 +15,7 @@ interface IMyApiInterfaceV1 {
 
    // 存储CustomData对象
    void storeData(in CustomData data);
+
+   // 用于注册客户端的回调
+   void addCallback(in IMyAidlCallback callback);
 }
