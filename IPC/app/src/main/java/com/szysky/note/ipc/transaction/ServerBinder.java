@@ -31,8 +31,6 @@ public class ServerBinder extends Binder {
 
         // 成功后返回true
         return true;
-
-
     }
 
     private String buildResult(String arg0, int arg1){
