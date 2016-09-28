@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_aidl_client"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.szysky.note.ipc.aidl.AidlClientActivity">
+
+    <TextView
+        android:text="输出内容在logcat中查看"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
+
+
+
+    <Button
+        android:text="添加一个对象"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="backAdd"
+        android:id="@+id/btn_add" />
+
+    <Button
+        android:text="查询大小"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_search" />
+</LinearLayout>
