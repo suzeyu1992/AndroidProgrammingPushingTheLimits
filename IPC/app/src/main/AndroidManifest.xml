@@ -8,7 +8,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!-- 开始aidl通信 -->
         <activity android:name=".aidl.AidlClientActivity"></activity>
@@ -20,21 +26,21 @@
 
         <!-- 开始messenger通信 -->
         <activity android:name=".messenger.MessengerClientActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <service android:name=".messenger.MessengerService" />
 
-        <receiver android:name="broadcast.ChargerConnectedReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
-            </intent-filter>
-        </receiver>
+
+        <activity android:name="broadcast.ChargerConnectedActivity">
+
+        </activity>
+        <!--<receiver android:name="broadcast.ChargerConnectedReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>-->
+                <!--<action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
     </application>
 
 </manifest>
