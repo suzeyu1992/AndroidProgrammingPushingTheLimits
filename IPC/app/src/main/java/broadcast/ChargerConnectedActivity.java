@@ -2,9 +2,11 @@ package broadcast;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -53,8 +55,11 @@ public class ChargerConnectedActivity extends Activity {
 //        myRegisterStickyBroadcast();
         // ***************************************************************
 
+
         // 注册电池广播监听
-        //gitmyRegisterBattery();
+//        myRegisterBattery();
+
+        setComponentEnable(false, ChargerConnectedReceiver.class );
 
     }
 
@@ -135,6 +140,19 @@ public class ChargerConnectedActivity extends Activity {
     }
 
 
+    /**
+     * 设置组件
+     * @param setClass 要设置改变的组件
+     * @param isEnable true为启用, false为禁用
+     */
+    public void setComponentEnable(boolean isEnable, Class setClass){
+        PackageManager pm = getPackageManager();
+        // 构建要改变组件的Component
+        ComponentName componentName = new ComponentName(getApplicationContext(), setClass);
+        pm.setComponentEnabledSetting(componentName,
+                isEnable ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+    }
 
 
     /**
