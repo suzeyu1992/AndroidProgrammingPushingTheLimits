@@ -21,5 +21,7 @@ public class ChargerConnectedReceiver extends BroadcastReceiver {
         }else if (Intent.ACTION_POWER_DISCONNECTED.equals(action)){
             Toast.makeText(context, "手机不充电了", Toast.LENGTH_SHORT).show();
         }
+
+
     }
 }

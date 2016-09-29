@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -43,6 +44,44 @@ public class ChargerConnectedActivity extends Activity {
                 instance.sendBroadcast(intent);
             }
         });
+
+        // ***************************************************************
+        // 1.第一遍打开下一行的注释运行程序,进入到广播解释界面, 发送一个粘性广播
+//        sendStickyBroadcast();
+
+        // 2.打开下面的注释, 把上一行注释掉. 注册一个粘性广播发送的接收者, 运行, 会发现上一次的广播intent保留
+//        myRegisterStickyBroadcast();
+        // ***************************************************************
+
+    }
+
+    /**
+     * 注册一个粘性广播
+     */
+    private void myRegisterStickyBroadcast(){
+        IntentFilter intent = new IntentFilter("com.szysky.test.sticky");
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (isInitialStickyBroadcast()) {
+                    // 这是一个粘性广播
+                    Log.e("sususu", "这是一个粘性广播");
+                } else {
+                    Log.e("sususu", "这是不是粘性广播");
+
+                }
+            }
+        };
+        registerReceiver(broadcastReceiver, intent);
+    }
+
+    /**
+     * 发送一个粘性广播
+     */
+    private void sendStickyBroadcast(){
+        Intent intent = new Intent("com.szysky.test.sticky");
+        sendStickyBroadcast(intent);
+        Log.e("sususu", "粘性广播注册成功");
     }
 
     @Override
