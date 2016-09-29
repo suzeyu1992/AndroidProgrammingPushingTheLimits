@@ -12,18 +12,26 @@
 
         </activity>
 
+
+        <!--开始aidl通信-->
+        <activity android:name=".aidl.AidlClientActivity">
+
+        </activity>
         <service
             android:name=".aidl.AidlService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".aidl.AidlClientActivity">
+
+        <!--开始messenger通信-->
+        <activity android:name=".messenger.MessengerClientActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".messenger.MessengerService"/>
     </application>
 
 </manifest>

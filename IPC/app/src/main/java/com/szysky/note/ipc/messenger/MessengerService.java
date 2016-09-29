@@ -23,7 +23,7 @@ import android.util.Log;
 
 public class MessengerService extends Service{
 
-    private static final String TAG = Messenger.class.getSimpleName();
+    private static final String TAG = "sususu";
     private Handler mMessageHandler;
     private Messenger mMessenger;
 
@@ -63,10 +63,13 @@ public class MessengerService extends Service{
             switch (msg.what){
                 case MessageAPI.SEND_TEXT_MSG:
                     delivered = sendTextMessage((String)msg.obj);
+                    Log.d(TAG, "服务端收到 text消息");
                     break;
 
                 case MessageAPI.SEND_PHOTO_MSG:
                     delivered = sendPhotoMessage((Bitmap)msg.obj);
+                    Log.d(TAG, "服务端收到 photo消息");
+
                     break;
             }
 
