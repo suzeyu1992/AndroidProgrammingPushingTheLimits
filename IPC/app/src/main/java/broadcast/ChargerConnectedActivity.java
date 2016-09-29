@@ -49,9 +49,12 @@ public class ChargerConnectedActivity extends Activity {
         // 1.第一遍打开下一行的注释运行程序,进入到广播解释界面, 发送一个粘性广播
 //        sendStickyBroadcast();
 
-        // 2.打开下面的注释, 把上一行注释掉. 注册一个粘性广播发送的接收者, 运行, 会发现上一次的广播intent保留
+        // 2.打开下面的注释, 把上一行注释掉. 注册一个粘性广播发送的接收者, 运行, 会发现上一次的广播
 //        myRegisterStickyBroadcast();
         // ***************************************************************
+
+        // 注册电池广播监听
+        //gitmyRegisterBattery();
 
     }
 
@@ -82,6 +85,32 @@ public class ChargerConnectedActivity extends Activity {
         Intent intent = new Intent("com.szysky.test.sticky");
         sendStickyBroadcast(intent);
         Log.e("sususu", "粘性广播注册成功");
+    }
+
+
+    /**
+     *  监听电池变化的粘性广播接收者
+     */
+    private void myRegisterBattery(){
+        // 构建广播接收者要接收的action
+        IntentFilter intent = new IntentFilter();
+        intent.addAction(Intent.ACTION_BATTERY_CHANGED);
+        intent.addAction(Intent.ACTION_BATTERY_OKAY);
+        intent.addAction(Intent.ACTION_BATTERY_LOW);
+
+        // 创建监听
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (isInitialStickyBroadcast()) {
+                    Log.e("sususu", "这是一个粘性广播");
+                } else {
+                    Log.e("sususu", "这是不是粘性广播");
+                }
+            }
+        };
+        // 注册接收者
+        registerReceiver(broadcastReceiver, intent);
     }
 
     @Override
