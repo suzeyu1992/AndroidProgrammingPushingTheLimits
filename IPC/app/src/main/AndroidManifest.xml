@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:installLocation="internalOnly"
     package="com.szysky.note.ipc">
 
-    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 
     <application
         android:allowBackup="true"
@@ -19,7 +23,7 @@
         </activity>
 
         <!-- 开始aidl通信 -->
-        <activity android:name=".aidl.AidlClientActivity"></activity>
+        <activity android:name=".aidl.AidlClientActivity" />
 
         <service
             android:name=".aidl.AidlService"
@@ -27,20 +31,27 @@
             android:exported="true" />
 
         <!-- 开始messenger通信 -->
-        <activity android:name=".messenger.MessengerClientActivity">
-
-        </activity>
+        <activity android:name=".messenger.MessengerClientActivity"></activity>
 
         <service android:name=".messenger.MessengerService" />
 
+        <activity android:name="broadcast.ChargerConnectedActivity"></activity>
 
-        <activity android:name="broadcast.ChargerConnectedActivity">
-
-        </activity>
         <receiver android:name="broadcast.ChargerConnectedReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+
+        <!--监听重启-->
+        <receiver
+            android:name="broadcast.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
     </application>
