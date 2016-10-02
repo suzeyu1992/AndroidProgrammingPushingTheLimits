@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:installLocation="internalOnly"
-    package="com.szysky.note.ipc">
+    package="com.szysky.note.ipc"
+    android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
 
     <application
         android:allowBackup="true"
@@ -31,11 +29,11 @@
             android:exported="true" />
 
         <!-- 开始messenger通信 -->
-        <activity android:name=".messenger.MessengerClientActivity"></activity>
+        <activity android:name=".messenger.MessengerClientActivity" />
 
         <service android:name=".messenger.MessengerService" />
 
-        <activity android:name="broadcast.ChargerConnectedActivity"></activity>
+        <activity android:name="broadcast.ChargerConnectedActivity" />
 
         <receiver android:name="broadcast.ChargerConnectedReceiver">
             <intent-filter>
@@ -44,7 +42,7 @@
             </intent-filter>
         </receiver>
 
-        <!--监听重启-->
+        <!-- 监听重启 -->
         <receiver
             android:name="broadcast.BootReceiver"
             android:enabled="true"
@@ -53,6 +51,22 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
+        </receiver>
+
+        <!-- 检查wifi广播-->
+        <receiver
+            android:name="broadcast.CheckForHomeWifi"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+
+                <!--监听wifi的连接状态是否连接上一个有效无线路由-->
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <!--监听wifi的打开和关闭, 和wifi具体的连接不关心-->
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+
         </receiver>
     </application>
 
