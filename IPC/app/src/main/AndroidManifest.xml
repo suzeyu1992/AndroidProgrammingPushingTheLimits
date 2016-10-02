@@ -53,20 +53,27 @@
             </intent-filter>
         </receiver>
 
-        <!-- 检查wifi广播-->
+        <!-- 检查wifi广播 -->
         <receiver
             android:name="broadcast.CheckForHomeWifi"
             android:enabled="true"
             android:exported="true">
-
             <intent-filter>
 
-                <!--监听wifi的连接状态是否连接上一个有效无线路由-->
+                <!-- 监听wifi的连接状态是否连接上一个有效无线路由 -->
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
-                <!--监听wifi的打开和关闭, 和wifi具体的连接不关心-->
+                <!-- 监听wifi的打开和关闭, 和wifi具体的连接不关心 -->
                 <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
+        </receiver>
 
+        <!--判断手机连接-->
+        <receiver
+            android:name="broadcast.WhenOn3GorLTE">
+            <intent-filter>
+                <!--此广播监听, 网络连接的设置包括wifi和数据的打开和关闭-->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
         </receiver>
     </application>
 
