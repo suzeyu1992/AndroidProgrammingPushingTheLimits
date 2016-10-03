@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="显示结果"
+        android:id="@+id/speech_result"/>
+
+    <Button
+        android:text="开始转换"
+        android:onClick="doSpeechRecognition"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/do_speech_recognition_btn"
+        android:layout_marginTop="100dp"/>
+</LinearLayout>
