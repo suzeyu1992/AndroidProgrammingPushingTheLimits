@@ -20,7 +20,7 @@ public class SmsReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         if (SMS_RECEIVED_ACTION.equals(action)) {
             // 通过 pdus 获取SMS数据的隐藏键
-            Object[] messages = 
+            Object[] messages =
                     (Object[]) intent.getSerializableExtra("pdus");
             for (Object message : messages) {
                 byte[] messageData = (byte[]) message;

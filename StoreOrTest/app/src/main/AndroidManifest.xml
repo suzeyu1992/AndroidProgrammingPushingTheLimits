@@ -3,6 +3,7 @@
     package="com.szysky.note.storeortest">
 
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:allowBackup="true"

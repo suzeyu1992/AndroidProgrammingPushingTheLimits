@@ -1,8 +1,12 @@
 package com.szysky.note.storeortest;
 
+import android.net.wifi.WifiConfiguration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
+import com.szysky.note.storeortest.hideapi.WifiApUtil;
 import com.szysky.note.storeortest.secure.ClientSecure;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,5 +28,13 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void onCheckWifi(View view){
+        WifiConfiguration wifiApConfig = WifiApUtil.getWifiApConfig(getApplicationContext());
+        String preSharedKey = wifiApConfig.preSharedKey;
+        int status = wifiApConfig.status;
+        Toast.makeText(getApplicationContext(), preSharedKey+"  状态:"+status, Toast.LENGTH_SHORT).show();
     }
 }
