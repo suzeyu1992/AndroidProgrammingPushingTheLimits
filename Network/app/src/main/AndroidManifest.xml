@@ -16,12 +16,15 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".HttpGet"
-            android:exported="false" />
+
         <service
             android:name=".HTTPGet"
-            android:exported="false"></service>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.heiheihei"/>
+            </intent-filter>
+
+        </service>
     </application>
 
 </manifest>

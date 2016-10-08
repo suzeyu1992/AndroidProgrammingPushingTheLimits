@@ -3,6 +3,7 @@ package com.szysky.note.network;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Base64;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +38,7 @@ public class HTTPGet extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
+        Log.e(TAG, "service 启动了");
     }
 
 
